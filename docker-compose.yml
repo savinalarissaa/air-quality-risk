@@ -1,0 +1,164 @@
+version: '3.8'
+
+services:
+  # =========================
+  # ZOOKEEPER & KAFKA
+  # =========================
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - kafka-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_INTERNAL://0.0.0.0:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    networks:
+      - kafka-network
+
+  # ==============================
+  # PRODUCER 1 – WAQI (AQI DATA)
+  # ==============================
+  producer-waqi:
+    build:
+      context: .
+      dockerfile: Dockerfile.waqi
+    volumes:
+      - ./data:/app/data
+    container_name: producer-waqi
+    depends_on:
+      kafka:
+        condition: service_started
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_TOPIC: waqi-data
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+  # ==============================
+  # PRODUCER 2 – WEATHER API
+  # ==============================
+  producer-weather:
+    build:
+      context: .
+      dockerfile: Dockerfile.weather
+    volumes:
+      - ./data:/app/data
+    container_name: producer-weather
+    depends_on:
+      kafka:
+        condition: service_started
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_TOPIC: weather-data
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+  # ==============================
+  # CONSUMER (PRINT DATA / STORE DB)
+  # ==============================
+  consumer:
+    image: python:3.11-slim
+    container_name: kafka-consumer
+    depends_on:
+      - kafka
+      - mongodb
+    volumes:
+      - ./scripts:/app/scripts
+    working_dir: /app/scripts
+    command: >
+      sh -c "pip install kafka-python pandas pymongo &&
+             python consumer_print.py"
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+  # ==============================
+  # STORAGE DATABASE (MongoDB)
+  # ==============================
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb-kafka
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: datastream_db
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - kafka-network
+
+  # ==============================
+  # MONGO EXPRESS (GUI)
+  # ==============================
+  mongo-express:
+    image: mongo-express:1.0.0
+    container_name: mongo-express-kafka
+    restart: always
+    ports:
+      - "8081:8081"      # BUKA DI BROWSER
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017/
+      ME_CONFIG_BASICAUTH: false
+    depends_on:
+      - mongodb
+    networks:
+      - kafka-network
+
+  # ==============================
+  # DATA DIMASUKIN
+  # ==============================
+  store-to-mongo:
+    image: python:3.11-slim
+    container_name: store-to-mongo
+    volumes:
+      - ./data:/app/data        # akses CSV
+      - ./scripts:/app/scripts  # script python
+    working_dir: /app/scripts
+    command: >
+      sh -c "pip install pandas pymongo &&
+            python store_data.py"
+    depends_on:
+      - mongodb
+    entrypoint: bash 
+    tty: true                    
+    networks:
+      - kafka-network
+    restart: unless-stopped
+
+# ==============================
+# VOLUME & NETWORK
+# ==============================
+volumes:
+  mongodb_data:
+
+networks:
+  kafka-network:
+    driver: bridge

@@ -1,0 +1,17 @@
+import requests
+
+KEY = "c24dd3320819449185131540251809"  # pakai key kamu
+URL = "http://api.weatherapi.com/v1/current.json"
+
+# list kecamatan yang akan diuji
+test_kecamatan = ["Cakung", "Cempaka Putih", "Tebet", "Menteng", "Kebayoran Baru"]
+
+for kc in test_kecamatan:
+    params = {"key": KEY, "q": f"{kc}, Jakarta", "aqi": "no"}
+    try:
+        resp = requests.get(URL, params=params, timeout=10)
+        data = resp.json()
+        current = data.get("current")  # ambil data cuaca
+        print(f"{kc} -> {current}")    # cek apakah 'current' kosong atau berisi
+    except Exception as e:
+        print(f"{kc} error: {e}")

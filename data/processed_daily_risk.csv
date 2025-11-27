@@ -1,0 +1,2 @@
+date,pm25_avg,pm10_avg,uvi_avg,temp_mean,humidity_mean,wind_mean,risk_score,risk_category
+2025-11-27,154.0,84.0,3.0,30.07954545454546,66.22727272727273,13.336363636363638,124.22272727272727,Tinggi
