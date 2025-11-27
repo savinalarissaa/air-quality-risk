@@ -18,8 +18,16 @@ st.set_page_config(
 def load_weather_data():
     DATA_FILENAME = Path(__file__).parent / 'data/weather/DKIJakarta_weather_output.csv'
     df = pd.read_csv(DATA_FILENAME)
-    df['Last Update'] = pd.to_datetime(df['Last Update'])
-    return df
+    df['Last Update'] = pd.to_datetime(df['Last Update'], errors='coerce')
+
+    # Filter data
+    filtered_df = df[
+        (df['Kecamatan'].isin(selected_kecamatan)) &
+        (df['Last Update'].dt.date >= start_date) &
+        (df['Last Update'].dt.date <= end_date)
+    ]
+
+    return filtered_df
 
 df = load_weather_data()
 
