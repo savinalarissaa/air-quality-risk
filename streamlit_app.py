@@ -42,17 +42,37 @@ st.write("Jumlah data:", len(df))
 # -------------------------------
 # FILTERS
 # -------------------------------
+# Sidebar Filter
 st.sidebar.header("Filter Data")
 
-# Filter Kecamatan
 kecamatan_list = sorted(df['Kecamatan'].unique())
-selected_kecamatan = st.sidebar.multiselect("Pilih Kecamatan:", kecamatan_list, kecamatan_list[:3])
+selected_kecamatan = st.sidebar.multiselect(
+    "Pilih Kecamatan:",
+    kecamatan_list,
+    kecamatan_list[:3]  # default 3 pertama
+)
 
-# Filter Rentang Waktu
-min_date = df['Last Update'].min()
-max_date = df['Last Update'].max()
+# Filter tanggal
+min_date = df['Last Update'].min().date()
+max_date = df['Last Update'].max().date()
 
-start_date, end_date = st.sidebar.date_input("Rentang Waktu:", [min_date, max_date])
+start_date, end_date = st.sidebar.date_input(
+    "Rentang Waktu:",
+    [min_date, max_date]
+)
+
+# Cek dulu sebelum filter
+if not selected_kecamatan:
+    st.warning("⚠ Silakan pilih minimal 1 kecamatan di sidebar.")
+    st.stop()
+
+# Filter dataframe
+filtered_df = df[
+    (df['Kecamatan'].isin(selected_kecamatan)) &
+    (df['Last Update'].dt.date >= start_date) &
+    (df['Last Update'].dt.date <= end_date)
+]
+
 
 # -------------------------------
 # APPLY FILTER
