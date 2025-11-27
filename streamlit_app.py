@@ -16,7 +16,7 @@ st.set_page_config(
 # -------------------------------
 @st.cache_data
 def load_weather_data():
-    DATA_FILENAME = Path(__file__).parent / 'data/DKIJakarta_weather_output.csv'
+    DATA_FILENAME = Path(__file__).parent / 'data/weather/DKIJakarta_weather_output.csv'
     df = pd.read_csv(DATA_FILENAME)
     df['Last Update'] = pd.to_datetime(df['Last Update'])
     return df
