@@ -20,13 +20,6 @@ def load_weather_data():
     df = pd.read_csv(DATA_FILENAME)
     df['Last Update'] = pd.to_datetime(df['Last Update'], errors='coerce')
 
-    # Filter data
-    filtered_df = df[
-        (df['Kecamatan'].isin(selected_kecamatan)) &
-        (df['Last Update'].dt.date >= start_date) &
-        (df['Last Update'].dt.date <= end_date)
-    ]
-
     return filtered_df
 
 df = load_weather_data()

@@ -8,11 +8,11 @@ PID to-do:
 - di kode getdata_waqi.py (V)
 -- tokennya dipisahin dari url (V)
 -- tempatnya dipisahin dari url (V)
--- tempatnya jgn hanya jkt doang
+-- tempatnya jgn hanya jkt doang (masih kurang stasiun)
 --- bisa gak nyari stasiun secara automatis? pake koordinat diatas? kalau ngga manual aja.
 
 - (V) buat kode getdata_weatherAPI.py 
--- referensi pake yg ada di kompar aja, tapi jgn dijadiin xlsx tp .csv
+-- referensi pake yg ada di kompar aja, tapi jgn dijadiin xlsx tp .csv (V)
 
 - gabungin kafka ke mongo db
 -- belum ada datanya, coba dari data weather dulu
@@ -26,3 +26,7 @@ PID to-do:
 -- masukkin data dari mongo gmn?
 
 - dashboard grafana https://[username].grafana.net/dashboards
+
+yg ditanya ke bapaknya:
+- preprocessing pakai python bisa atau harus pakai airflow?
+- 
