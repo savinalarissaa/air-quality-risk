@@ -20,7 +20,7 @@ def load_weather_data():
     df = pd.read_csv(DATA_FILENAME)
     df['Last Update'] = pd.to_datetime(df['Last Update'], errors='coerce')
 
-    return filtered_df
+    return df
 
 df = load_weather_data()
 
