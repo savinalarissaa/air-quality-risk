@@ -66,16 +66,6 @@ filtered_df = df[
     (df['Last Update'].dt.date <= end_date)
 ]
 
-
-# -------------------------------
-# APPLY FILTER
-# -------------------------------
-filtered_df = df[
-    (df['Kecamatan'].isin(selected_kecamatan)) &
-    (df['Last Update'].dt.date >= pd.to_datetime(start_date)) &
-    (df['Last Update'].dt.date <= pd.to_datetime(end_date))
-]
-
 st.subheader("📌 Data yang Ditampilkan")
 st.dataframe(filtered_df, use_container_width=True)
 

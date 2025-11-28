@@ -9,24 +9,22 @@ PID to-do:
 -- tokennya dipisahin dari url (V)
 -- tempatnya dipisahin dari url (V)
 -- tempatnya jgn hanya jkt doang (masih kurang stasiun)
---- bisa gak nyari stasiun secara automatis? pake koordinat diatas? kalau ngga manual aja.
+--- (opsional) bisa gak nyari stasiun secara automatis? pake koordinat diatas? kalau ngga manual aja.
 
 - (V) buat kode getdata_weatherAPI.py 
 -- referensi pake yg ada di kompar aja, tapi jgn dijadiin xlsx tp .csv (V)
 
-- gabungin kafka ke mongo db
--- belum ada datanya, coba dari data weather dulu
-
 - storage mongodb
--- untuk penyimpanan data tinggal run store_data.py di terminal kedua
---- (opsional) di taruh ke file docker-compose biar otomatis (servisnya ada tapi gamau aktif) 
--- di store_data.py cuman nyimpan weather API doang, kurang kode penyimpanan data waqi
+= untuk penyimpanan data tinggal run store_data.py di terminal kedua
+-- (opsional) di taruh ke file docker-compose biar otomatis (servisnya ada tapi gamau aktif) 
+-- di store_data.py cuman nyimpan weather API doang (kurang kode penyimpanan data waqi)
 
 - analisis pakai airflow
 -- masukkin data dari mongo gmn?
 
-- dashboard grafana https://[username].grafana.net/dashboards
+- dashboard streamlit
 
 yg ditanya ke bapaknya:
+- data wilayahnya di waqi kurang, disesuaiin atau gimana? 
 - preprocessing pakai python bisa atau harus pakai airflow?
-- 
+- date di kode streamlit
