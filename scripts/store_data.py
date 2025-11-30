@@ -2,6 +2,7 @@ import pymongo
 import pandas as pd
 import time
 from datetime import datetime
+import analysis_preprocessing as prep
 
 # KONEKSI MongoDB
 client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
@@ -94,6 +95,7 @@ def main():
     print("STARTING CSV -> MongoDB weather stream...")
     try:
         while True:
+            prep.main()
             insert_weatherAPI_data()
             insert_WAQI_data()
             insert_risk_score_data()

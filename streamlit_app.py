@@ -1,6 +1,29 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
+import pymongo
+
+@st.cache_resource
+def init_connection():
+    return pymongo.MongoClient(**st.secrets["mongo"])
+
+client = init_connection()
+
+# # Pull data from the collection.
+# # Uses st.cache_data to only rerun when the query changes or after 10 min.
+# @st.cache_data(ttl=600)
+# def get_data():
+#     db = client.mydb
+#     items = db.mycollection.find()
+#     items = list(items)  # make hashable for st.cache_data
+#     return items
+
+# items = get_data()
+
+# # Print results.
+# for item in items:
+#     st.write(f"{item['name']} has a :{item['pet']}:")
+
 
 # -------------------------------
 # PAGE CONFIG
@@ -16,10 +39,9 @@ st.set_page_config(
 # -------------------------------
 @st.cache_data
 def load_weather_data():
-    DATA_FILENAME = Path(__file__).parent / 'data/weather/DKIJakarta_weather_output.csv'
+    DATA_FILENAME = Path(__file__).parent / 'data/weather/weatherAPI_output.csv'
     df = pd.read_csv(DATA_FILENAME)
     df['Last Update'] = pd.to_datetime(df['Last Update'], errors='coerce')
-
     return df
 
 df = load_weather_data()

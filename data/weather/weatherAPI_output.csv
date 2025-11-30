@@ -1,34 +1,34 @@
 Lokasi,Kecamatan,Last Update,Temperature,Humidity,Condition,Wind Speed,Wind Direction,UV Index
-serpong,Serpong,2025-12-01 04:00,24.1,94,Partly Cloudy,4.0,SE,0.0
-cilegon,Cilegon,2025-12-01 04:00,24.1,94,Partly Cloudy,6.5,SSE,0.0
-bandung,Bandung,2025-12-01 04:00,20.0,96,Light rain shower,3.6,SW,0.0
-tunggulrejo,Tunggulrejo,2025-12-01 04:00,22.8,89,Partly Cloudy,15.8,SSW,0.0
-manahan,Manahan,2025-12-01 04:00,23.2,84,Partly Cloudy,15.5,SSW,0.0
-surabaya,Surabaya,2025-12-01 04:00,25.0,100,Mist,3.6,WSW,0.0
-depok,Depok,2025-12-01 04:00,24.1,94,Partly Cloudy,5.4,ESE,0.0
-serang,Serang,2025-12-01 04:00,24.1,94,Partly Cloudy,5.0,SSE,0.0
-purwakarta,Purwakarta,2025-12-01 04:00,23.3,92,Patchy rain nearby,5.0,S,0.0
-ngaliyan,Ngaliyan,2025-12-01 04:00,21.7,87,Cloudy,5.0,SSW,0.0
-plumbungan,Plumbungan,2025-12-01 04:00,25.3,77,Cloudy,6.8,SW,0.0
-kediri,Kediri,2025-12-01 04:00,22.8,89,Partly Cloudy,15.8,SSW,0.0
-cisarua,Cisarua,2025-12-01 04:00,24.1,94,Partly Cloudy,3.6,S,0.0
-cilegon,Cilegon,2025-12-01 04:00,24.1,94,Partly Cloudy,6.5,SSE,0.0
-pelabuhanratu,Pelabuhanratu,2025-12-01 04:00,22.7,89,Partly Cloudy,4.3,E,0.0
-candirejo,Candirejo,2025-12-01 04:00,23.5,98,Fog,3.6,SW,0.0
-mojopanggung,Mojopanggung,2025-12-01 04:00,19.2,93,Partly Cloudy,6.8,SW,0.0
-leuwiliang,Leuwiliang,2025-12-01 04:00,22.7,91,Patchy rain nearby,3.6,SE,0.0
-indramayu,Indramayu,2025-12-01 04:00,26.3,78,Light rain shower,6.1,SSW,0.0
-sidakaya,Sidakaya,2025-12-01 04:00,21.1,94,Cloudy,3.6,SSW,0.0
-kedopok,Kedopok,2025-12-01 04:00,23.7,88,Partly Cloudy,6.8,S,0.0
-bogor,Bogor,2025-12-01 04:00,24.1,94,Partly Cloudy,3.6,SE,0.0
-rembang,Rembangan,2025-12-01 04:00,23.4,91,Partly Cloudy,10.8,SSW,0.0
-mojokerto,Mojokerto,2025-12-01 03:45,25.0,100,Mist,13.3,SW,0.0
-bekasi,Bekasi,2025-12-01 04:00,24.1,94,Partly Cloudy,10.4,SE,0.0
-madiun,Madiun,2025-12-01 03:45,23.3,90,Cloudy,7.6,SSW,0.0
-gbk,Gbangbatok Airport,2025-11-30 21:00,25.9,82,Partly Cloudy,9.0,WSW,0.0
-jombang,Jombang,2025-12-01 04:00,25.0,100,Mist,17.3,SSW,0.0
-tangerang,Tangerang,2025-12-01 04:00,24.1,94,Partly Cloudy,6.1,ESE,0.0
-lamongan,Lamongan,2025-12-01 04:00,25.0,100,Mist,6.8,WSW,0.0
-jakarta-timur,Pinggirrawa Timur,2025-12-01 04:00,24.1,94,Partly Cloudy,7.2,ESE,0.0
-tuban,Tuban,2025-12-01 04:00,24.5,85,Partly Cloudy,12.2,SSW,0.0
-bojonegoro,Bojonegoro,2025-12-01 04:00,23.5,89,Cloudy,6.1,SW,0.0
+serpong,Serpong,2025-12-01 04:15,25.0,94,Mist,4.0,SE,0.0
+cilegon,Cilegon,2025-12-01 04:15,25.0,94,Mist,6.5,SSE,0.0
+bandung,Bandung,2025-12-01 04:15,20.0,96,Light rain shower,3.6,SW,0.0
+tunggulrejo,Tunggulrejo,2025-12-01 04:15,22.8,89,Partly Cloudy,15.8,SSW,0.0
+manahan,Manahan,2025-12-01 04:15,23.2,84,Partly Cloudy,15.5,SSW,0.0
+surabaya,Surabaya,2025-12-01 04:15,25.3,94,Mist,3.6,WSW,0.0
+depok,Depok,2025-12-01 04:15,25.0,94,Mist,5.4,ESE,0.0
+serang,Serang,2025-12-01 04:15,25.0,94,Mist,5.0,SSE,0.0
+purwakarta,Purwakarta,2025-12-01 04:15,23.3,92,Patchy rain nearby,5.0,S,0.0
+ngaliyan,Ngaliyan,2025-12-01 04:15,21.7,87,Cloudy,5.0,SSW,0.0
+plumbungan,Plumbungan,2025-12-01 04:15,25.3,77,Cloudy,6.8,SW,0.0
+kediri,Kediri,2025-12-01 04:15,22.8,89,Partly Cloudy,15.8,SSW,0.0
+cisarua,Cisarua,2025-12-01 04:15,25.0,94,Mist,3.6,S,0.0
+cilegon,Cilegon,2025-12-01 04:15,25.0,94,Mist,6.5,SSE,0.0
+pelabuhanratu,Pelabuhanratu,2025-12-01 04:15,22.7,89,Partly Cloudy,4.3,E,0.0
+candirejo,Candirejo,2025-12-01 04:15,23.5,98,Fog,3.6,SW,0.0
+mojopanggung,Mojopanggung,2025-12-01 04:15,19.2,93,Partly Cloudy,6.8,SW,0.0
+leuwiliang,Leuwiliang,2025-12-01 04:15,22.7,91,Patchy rain nearby,3.6,SE,0.0
+indramayu,Indramayu,2025-12-01 04:15,26.3,78,Light rain shower,6.1,SSW,0.0
+sidakaya,Sidakaya,2025-12-01 04:15,21.1,94,Cloudy,3.6,SSW,0.0
+kedopok,Kedopok,2025-12-01 04:15,23.7,88,Partly Cloudy,6.8,S,0.0
+bogor,Bogor,2025-12-01 04:15,25.0,94,Mist,3.6,SE,0.0
+rembang,Rembangan,2025-12-01 04:15,23.4,91,Partly Cloudy,10.8,SSW,0.0
+mojokerto,Mojokerto,2025-12-01 04:15,25.3,94,Mist,11.2,SW,0.0
+bekasi,Bekasi,2025-12-01 04:15,25.0,94,Mist,10.4,SE,0.0
+madiun,Madiun,2025-12-01 04:15,23.6,88,Partly Cloudy,8.6,SSW,0.0
+gbk,Gbangbatok Airport,2025-11-30 21:15,25.9,82,Partly Cloudy,9.0,WSW,0.0
+jombang,Jombang,2025-12-01 04:15,25.3,94,Mist,17.3,SSW,0.0
+tangerang,Tangerang,2025-12-01 04:15,25.0,94,Mist,6.1,ESE,0.0
+lamongan,Lamongan,2025-12-01 04:15,25.3,94,Mist,6.8,WSW,0.0
+jakarta-timur,Pinggirrawa Timur,2025-12-01 04:15,25.0,94,Mist,7.2,ESE,0.0
+tuban,Tuban,2025-12-01 04:15,24.5,85,Partly Cloudy,12.2,SSW,0.0
+bojonegoro,Bojonegoro,2025-12-01 04:15,23.5,89,Cloudy,6.1,SW,0.0
