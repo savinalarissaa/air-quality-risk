@@ -1,5 +1,5 @@
 // Beralih ke database iot_db
-db = db.getSiblingDB('iot_db');
+db = db.getSiblingDB('air_quality_db');
 
 // Buat user untuk aplikasi
 db.createUser({
@@ -8,7 +8,7 @@ db.createUser({
   roles: [
     {
       role: 'readWrite',
-      db: 'iot_db'
+      db: 'air_quality_db'
     }
   ]
 });
@@ -16,6 +16,7 @@ db.createUser({
 // Buat collection untuk sensor data
 db.createCollection('data_waqi');
 db.createCollection('data_weatherAPI');
+db.createCollection('data_risk_score');
 // db.createCollection('');
 
 // Insert sample devices

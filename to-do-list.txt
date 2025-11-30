@@ -1,30 +1,30 @@
-106.689548,-6.059989,106.9697,-6.349421
-
-106.9697,-6.059989,106.689548,-6.349421
-
--6.059989
-
 PID to-do:
 - di kode getdata_waqi.py (V)
 -- tokennya dipisahin dari url (V)
 -- tempatnya dipisahin dari url (V)
--- tempatnya jgn hanya jkt doang (masih kurang stasiun)
---- (opsional) bisa gak nyari stasiun secara automatis? pake koordinat diatas? kalau ngga manual aja.
+-- tempatnya jgn hanya jkt doang (masih kurang stasiun) (V)
+--o (opsional) bisa gak nyari stasiun secara automatis? pake koordinat diatas? kalau ngga manual aja.
 
 - (V) buat kode getdata_weatherAPI.py 
 -- referensi pake yg ada di kompar aja, tapi jgn dijadiin xlsx tp .csv (V)
 
 - storage mongodb
 = untuk penyimpanan data tinggal run store_data.py di terminal kedua
--- (opsional) di taruh ke file docker-compose biar otomatis (servisnya ada tapi gamau aktif) 
--- di store_data.py cuman nyimpan weather API doang (kurang kode penyimpanan data waqi)
+-o (opsional) di taruh ke file docker-compose biar otomatis (servisnya ada tapi gamau aktif) 
+-- di store_data.py cuman nyimpan weather API doang (kurang kode penyimpanan data waqi + daity_risk) (V)
+-- store_data.py : dilakukan per jam (per 5 menit aja, for now V)
+-- buat satu cvs lagi yg ngitung rata2 risk utk satu pulau jawa \
 
-- analisis pakai airflow
--- masukkin data dari mongo gmn?
+o di docker-compose producernya dijadiin satu bisa?
 
 - dashboard streamlit
+-- lihat lagi prosessed_daily_risk, ada yg kurang tidak
+-- cara ngasih data lgsg dr mongodb, bukan dr csv
+--- test bisa atau nggak
+-- grafik risk_score, per baris satu wilayah
+--- utk skrg gausah kasih tren risk, kasih data per wiayah aja
 
 yg ditanya ke bapaknya:
-- data wilayahnya di waqi kurang, disesuaiin atau gimana? 
-- preprocessing pakai python bisa atau harus pakai airflow?
-- date di kode streamlit
+- data wilayahnya di waqi kurang, disesuaiin atau gimana? (pulau jawa)
+- preprocessing pakai python bisa atau harus pakai airflow? (python bisa yayyy)
+- date di kode streamlit (pakai agent AI(bruh why))

@@ -135,23 +135,23 @@ services:
   # ==============================
   # DATA DIMASUKIN
   # ==============================
-  store-to-mongo:
-    image: python:3.11-slim
-    container_name: store-to-mongo
-    volumes:
-      - ./data:/app/data        # akses CSV
-      - ./scripts:/app/scripts  # script python
-    working_dir: /app/scripts
-    command: >
-      sh -c "pip install pandas pymongo &&
-            python store_data.py"
-    depends_on:
-      - mongodb
-    entrypoint: bash 
-    tty: true                    
-    networks:
-      - kafka-network
-    restart: unless-stopped
+  # store-to-mongo:
+  #   image: python:3.11-slim
+  #   container_name: store-to-mongo
+  #   volumes:
+  #     - ./data:/app/data        # akses CSV
+  #     - ./scripts:/app/scripts  # script python
+  #   working_dir: /app/scripts
+  #   command: >
+  #     sh -c "pip install pandas pymongo &&
+  #           python store_data.py"
+  #   depends_on:
+  #     - mongodb
+  #   entrypoint: bash 
+  #   tty: true                    
+  #   networks:
+  #     - kafka-network
+  #   restart: unless-stopped
 
 # ==============================
 # VOLUME & NETWORK
