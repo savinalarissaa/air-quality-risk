@@ -1,8 +1,16 @@
+# import streamlit as st
+# import pandas as pd
+# from pathlib import Path
+# import pymongo
+
 import streamlit as st
 import pandas as pd
-from pathlib import Path
 import pymongo
+import matplotlib.pyplot as plt
 
+# ------------------------------------------
+# MONGODB CONNECTION
+# ------------------------------------------
 MONGO_URI = "mongodb://iot_user:iot_password@localhost:27017/"
 DB_NAME = "air_quality_db"
 COLLECTION_NAME = "data_risk_score"
@@ -64,6 +72,33 @@ ax.set_xlabel("Time")
 ax.set_ylabel("Risk Score")
 ax.set_title("Grafik Risk Score per Waktu")
 st.pyplot(fig)
+
+# ------------------------------------------
+# TAMBAHKAN DISKETRISASI (Pie Chart)
+# ------------------------------------------
+st.subheader("📊 Distribusi Kategori Risiko")
+
+pie_data = df_filtered["risk_category"].value_counts()
+fig2, ax2 = plt.subplots()
+ax2.pie(pie_data, labels=pie_data.index, autopct='%1.1f%%')
+ax2.set_title("Sebaran Risk Category")
+st.pyplot(fig2)
+
+# ------------------------------------------
+# STATISTIK CEPAT
+# ------------------------------------------
+st.subheader("📌 Statistik")
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Risk Score Rata-rata", f"{df_filtered['risk_score'].mean():.2f}")
+col2.metric("Risk Score Maximum", f"{df_filtered['risk_score'].max():.2f}")
+col3.metric("Jumlah Data", len(df_filtered))
+
+# ------------------------------------------
+# CATATAN
+# ------------------------------------------
+st.markdown("---")
+st.write("Dashboard ini membaca data langsung dari MongoDB: **" + DB_NAME + "." + COLLECTION_NAME + "**")
 
 # @st.cache_resource
 # def init_connection():
