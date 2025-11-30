@@ -8,7 +8,7 @@ Station ID,Kecamatan,Last Update,AQI,Dominant Pollutant,PM10,PM25,CO,NO2,SO2,O3
 416857,Depok Pancoran Mas,2025-12-01 04:00:00,60,pm25,16,60,0,14,4,19
 416821,Serang Sumurpecung,2025-12-01 04:00:00,44,pm25,34,44,0,26,24,33
 531553,Kabupaten Purwakarta Purnawarman,2025-12-01 04:00:00,44,pm25,12,44,0,4,5,13
-506572,Ngaliyan - Nafas,2025-12-01 04:35:20,131,pm25,53,131,null,null,null,null
+506572,Ngaliyan - Nafas,2025-12-01 04:41:20,124,pm25,50,124,null,null,null,null
 519043,Kabupaten Sragen Plumbungan,2025-12-01 04:00:00,118,pm25,44,118,0,10,6,27
 519187,Kota Kediri Ngronggo,2025-12-01 04:00:00,56,pm25,18,56,0,9,8,14
 544657,Kabupaten Bogor Cisarua,2025-12-01 00:00:00,-,pm25,11,39,0,42,46,42
