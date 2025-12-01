@@ -72,13 +72,6 @@ if "Last Update" in df_combined.columns:
     min_date = df_combined["Last Update"].min().date()
     max_date = df_combined["Last Update"].max().date()
 
-    # start_date, end_date = st.date_input(
-    #     "Pilih rentang waktu:",
-    #     (min_date, max_date),
-    #     min_value=min_date,
-    #     max_value=max_date,
-    # )
-
     df_filtered = df_combined[
         (df_combined["Last Update"].dt.date >= start_date) &
         (df_combined["Last Update"].dt.date <= end_date)

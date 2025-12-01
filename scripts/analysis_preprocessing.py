@@ -41,8 +41,6 @@ def process_combine_data():
         row = {**waqi.iloc[i].to_dict(), **weather.iloc[i].to_dict()}
         combined_rows.append(row)
 
-    #Station ID,Kecamatan,Last Update,AQI,Dominant Pollutant,PM10,PM25,CO,NO2,SO2,O3,Lokasi,Temperature,Humidity,Condition,Wind Speed,Wind Direction,UV Index,risk_score,risk_category
-
     combined = pd.DataFrame(combined_rows)
 
     combined["risk_score"] = calculate_risk_score(combined)
@@ -50,8 +48,7 @@ def process_combine_data():
 
     output_csv = "data/processed_combined_data.csv"
     combined.to_csv(output_csv, index=False)
-
-    print("DATA BERHASIL DIKOMBINASI! File disimpan di:", output_csv)
+    print("File kombinasi data disimpan di:", output_csv)
     print(combined.head())
 
     return combined
@@ -73,14 +70,11 @@ def process_risk_score():
         
     df["risk_score"] = calculate_risk_score(df)
     df["risk_category"] = df["risk_score"].apply(categorize) 
-
-    print("DATASET PREPOCESSING RISK SCORE SELESAI ✅")
-    print(df)
     
     # 8. Simpan ke CSV
     output_risk = "data/processed_data_risk-score.csv"
     df.to_csv(output_risk, index=False)
-    print(f"\nFile disimpan sebagai: {output_risk}")
+    print(f"\nFile risk score disimpan sebagai: {output_risk}")
 
 def main():
     process_combine_data()

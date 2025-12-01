@@ -7,9 +7,6 @@ import from_mongodb as export
 
 # KONEKSI MongoDB
 client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
-# client = pymongo.MongoClient(
-#     "mongodb+srv://savinalarissa_db_user:pass123@pid.bngfn1a.mongodb.net/?appName=PID"
-# )
 
 db = client.air_quality_db
 weatherAPI_collection = db.data_weatherAPI
@@ -107,7 +104,6 @@ def insert_combined_data():
         df = pd.read_csv(CSV_FILE_COMBINED)
         for _, row in df.iterrows():
             doc = {
-                # Station ID,Kecamatan,Last Update,AQI,Dominant Pollutant,PM10,PM25,CO,NO2,SO2,O3,Lokasi,Temperature,Humidity,Condition,Wind Speed,Wind Direction,UV Index,risk_score,risk_category
                 'kecamatan' : row['Kecamatan'],
                 'last_update': row['Last Update'],
                 'risk_score': row['risk_score'],
