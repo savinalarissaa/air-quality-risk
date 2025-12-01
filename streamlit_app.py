@@ -39,8 +39,8 @@ if "Last Update" in df_combined.columns:
 if "last_update" in df_risk.columns:
     df_risk["last_update"] = pd.to_datetime(df_risk["last_update"])
 
-# st.subheader("testing")
-st.write(df_risk['last_update'].head(20))
+# st.subheader("testing") # untuk testing
+# st.write(df_risk['last_update'].head(20))
 
 # --- FILTER BERDASAR TANGGAL (untuk risk score) ---
 st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
