@@ -11,23 +11,17 @@ st.set_page_config(
 
 # --- HEADER APLIKASI ---
 st.title("🌫️ Air Quality & Risk Score Dashboard")
-# st.write("Data dibaca langsung dari GitHub (tanpa MongoDB).")
 
 # --- LOAD DATA ---
 @st.cache_data
 def load_data():
     try:
-        # uri = "mongodb+srv://savinalarissa_db_user:pass123@pid.bngfn1a.mongodb.net/?appName=PID"
-        # client = pymongo.MongoClient(uri)
-        # db = client["air_quality_db"]
-        # collection = db["processed_risk_data"]
-        # data = list(collection.find({}, {"_id": 0}))
         FILENAME_combined = Path(__file__).parent / 'data/processed_combined_data.csv'
         FILENAME_risk = Path(__file__).parent / 'data/export_mongoDB_risk_data.csv'
         df_combined = pd.read_csv(FILENAME_combined)
         df_risk = pd.read_csv(FILENAME_risk)
         df_combined['Last Update'] = pd.to_datetime(df_combined['Last Update'], errors='coerce')
-        df_risk['Last Update'] = pd.to_datetime(df_risk['Last Update'], errors='coerce')
+        df_risk['last_update'] = pd.to_datetime(df_risk['last_update'], errors='coerce')
         return df_combined, df_risk
     except Exception as e:
         st.error(f"Gagal membaca CSV: {e}")

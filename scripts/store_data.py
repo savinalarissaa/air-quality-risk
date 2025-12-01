@@ -3,6 +3,7 @@ import pandas as pd
 import time
 from datetime import datetime, timezone
 import analysis_preprocessing as prep
+import from_mongodb as export
 
 # KONEKSI MongoDB
 client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
@@ -94,6 +95,7 @@ def insert_risk_score_data():
             }
 
             risk_score_collection.insert_one(doc)
+            export.export_all_risk_score_to_csv() 
         
         print(f"✔ Inserted Risk Score")
 

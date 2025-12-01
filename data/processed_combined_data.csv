@@ -1,34 +1,34 @@
 Station ID,Kecamatan,Last Update,AQI,Dominant Pollutant,PM10,PM25,CO,NO2,SO2,O3,Lokasi,Temperature,Humidity,Condition,Wind Speed,Wind Direction,UV Index,risk_score,risk_category
-416785,Serpong,2025-12-02 04:15,77.0,pm25,21,77,0.0,9.0,9.0,12.0,serpong,25.1,94,Mist,4.3,SSW,0.0,61.89999999999999,Sedang
-472489,Cilegon,2025-12-02 04:15,88.0,pm25,35,88,0.0,21.0,19.0,1.0,cilegon,25.1,94,Mist,3.6,S,0.0,72.7,Sedang
-416860,Bandung,2025-12-02 04:15,8.0,pm25,34,81,0.0,31.0,33.0,8.0,bandung,20.1,93,Patchy rain nearby,4.3,SSE,0.0,68.1,Sedang
-472675,Tunggulrejo,2025-12-02 04:15,68.0,pm25,9,38,0.0,49.0,13.0,68.0,tunggulrejo,22.2,85,Partly Cloudy,12.6,SSW,0.0,34.0,Rendah
-416908,Manahan,2025-12-02 04:15,53.0,pm25,12,53,0.0,6.0,59.0,10.0,manahan,22.7,82,Partly Cloudy,12.6,SSW,0.0,43.6,Rendah
-420154,Surabaya,2025-12-02 04:15,117.0,pm25,51,117,0.0,0.0,26.0,1.0,surabaya,25.1,100,Mist,5.8,WSW,0.0,95.5,Sedang
-416857,Depok,2025-12-02 04:15,74.0,pm25,21,74,0.0,12.0,2.0,28.0,depok,25.3,94,Patchy rain nearby,4.3,SSW,0.0,60.099999999999994,Sedang
-416821,Serang,2025-12-02 04:15,36.0,pm25,36,34,0.0,26.0,24.0,33.0,serang,25.1,94,Mist,4.0,SW,0.0,40.599999999999994,Rendah
-531553,Purwakarta,2025-12-02 04:15,43.0,pm25,12,43,0.0,4.0,5.0,13.0,purwakarta,24.1,90,Patchy rain nearby,4.0,S,0.0,38.4,Rendah
-506572,Ngaliyan,2025-12-02 04:15,140.0,pm25,54,140,,,,,ngaliyan,22.1,87,Cloudy,3.6,SSW,0.0,108.9,Tinggi
-519043,Plumbungan,2025-12-02 04:15,129.0,pm25,49,129,0.0,10.0,6.0,26.0,plumbungan,25.3,100,Mist,5.8,SW,0.0,102.1,Tinggi
-519187,Kediri,2025-12-02 04:15,48.0,pm25,14,48,0.0,9.0,8.0,14.0,kediri,22.2,85,Partly Cloudy,12.6,SSW,0.0,41.5,Rendah
-544657,Cisarua,2025-12-02 04:15,41.0,pm25,4,15,0.0,40.0,45.0,41.0,cisarua,25.3,94,Partly Cloudy,3.6,SSW,0.0,19.6,Rendah
-472489,Cilegon,2025-12-02 04:15,88.0,pm25,35,88,0.0,21.0,19.0,1.0,cilegon,25.1,94,Mist,3.6,S,0.0,72.7,Sedang
-519145,Pelabuhanratu,2025-12-02 04:15,29.0,pm25,10,29,0.0,4.0,5.0,22.0,pelabuhanratu,23.2,90,Patchy rain nearby,5.0,ESE,0.0,29.4,Rendah
-472450,Candirejo,2025-12-02 04:15,44.0,pm25,13,44,0.0,17.0,7.0,13.0,candirejo,23.1,98,Moderate or heavy rain shower,3.6,N,0.0,40.099999999999994,Rendah
-519112,Mojopanggung,2025-12-02 04:15,42.0,pm25,17,42,0.0,4.0,5.0,22.0,mojopanggung,19.8,93,Patchy light drizzle,6.8,SW,0.0,39.599999999999994,Rendah
-472486,Leuwiliang,2025-12-02 04:15,58.0,pm25,26,58,0.0,1.0,5.0,51.0,leuwiliang,23.9,91,Partly Cloudy,5.4,SSW,0.0,51.699999999999996,Sedang
-472492,Indramayu,2025-12-02 04:15,66.0,pm25,22,66,0.0,6.0,7.0,17.0,indramayu,27.0,78,Partly Cloudy,10.1,SSW,0.0,54.0,Sedang
-472585,Sidakaya,2025-12-02 04:15,18.0,pm25,1,4,0.0,27.0,16.0,18.0,sidakaya,19.7,91,Partly Cloudy,3.6,SSE,0.0,11.799999999999999,Rendah
-532009,Kedopok,2025-12-02 04:15,25.0,pm25,8,25,0.0,4.0,5.0,22.0,kedopok,22.8,86,Patchy rain nearby,4.7,ESE,0.0,26.0,Rendah
-416833,Bogor,2025-12-02 04:15,,pm25,19,15,0.0,9.0,57.0,55.0,bogor,25.1,94,Mist,6.5,S,0.0,24.1,Rendah
-519124,Rembangan,2025-12-02 04:15,54.0,pm25,17,54,0.0,18.0,5.0,27.0,rembang,23.0,89,Patchy rain nearby,6.1,SW,0.0,46.4,Rendah
-519280,Mojokerto,2025-12-02 04:15,43.0,pm25,14,43,0.0,4.0,3.0,9.0,mojokerto,25.3,100,Mist,7.9,SSW,0.0,40.0,Rendah
-416815,Bekasi,2025-12-02 04:15,60.0,pm25,33,60,0.0,56.0,14.0,8.0,bekasi,25.1,94,Mist,3.6,SW,0.0,55.3,Sedang
-519016,Madiun,2025-12-02 04:15,101.0,pm25,16,101,0.0,9.0,6.0,16.0,madiun,22.7,82,Partly Cloudy,8.3,SSW,0.0,73.6,Sedang
-416842,Gbangbatok Airport,2025-12-01 21:15,43.0,pm25,16,43,0.0,25.0,6.0,5.0,gbk,25.5,85,Patchy rain nearby,8.6,W,0.0,39.1,Rendah
-516745,Jombang,2025-12-02 04:15,55.0,pm25,18,55,0.0,27.0,4.0,26.0,jombang,25.3,100,Mist,12.2,SSW,0.0,48.4,Rendah
-472477,Tangerang,2025-12-02 04:15,5.0,pm25,0,0,0.0,2.0,12.0,5.0,tangerang,25.1,94,Mist,5.8,SW,0.0,9.4,Rendah
-519010,Lamongan,2025-12-02 04:15,,pm25,44,329,0.0,9.0,0.0,0.0,lamongan,25.1,100,Mist,7.6,SW,0.0,220.6,Tinggi
-531565,Pinggirrawa Timur,2025-12-02 04:15,70.0,pm25,31,70,0.0,12.0,0.0,0.0,jakarta-timur,25.1,94,Mist,6.5,SSW,0.0,60.699999999999996,Sedang
-519007,Tuban,2025-12-02 04:15,82.0,pm25,33,82,0.0,0.0,0.0,0.0,tuban,24.8,80,Patchy rain nearby,16.9,SSW,0.0,67.1,Sedang
-519019,Bojonegoro,2025-12-02 04:15,55.0,pm25,19,55,0.0,0.0,18.0,23.0,bojonegoro,23.1,84,Patchy rain nearby,5.4,SW,0.0,47.1,Rendah
+416785,Serpong,2025-12-02 04:30,77.0,pm25,21,77,0.0,9.0,9.0,12.0,serpong,25.1,94,Mist,4.3,SSW,0.0,61.89999999999999,Sedang
+472489,Cilegon,2025-12-02 04:30,88.0,pm25,35,88,0.0,21.0,19.0,1.0,cilegon,25.1,94,Mist,3.6,S,0.0,72.7,Sedang
+416860,Bandung,2025-12-02 04:30,8.0,pm25,34,81,0.0,31.0,33.0,8.0,bandung,20.1,93,Patchy rain nearby,4.3,SSE,0.0,68.1,Sedang
+472675,Tunggulrejo,2025-12-02 04:30,68.0,pm25,9,38,0.0,49.0,13.0,68.0,tunggulrejo,22.2,85,Partly Cloudy,12.6,SSW,0.0,34.0,Rendah
+416908,Manahan,2025-12-02 04:30,53.0,pm25,12,53,0.0,6.0,59.0,10.0,manahan,22.7,82,Partly Cloudy,12.6,SSW,0.0,43.6,Rendah
+420154,Surabaya,2025-12-02 04:30,117.0,pm25,51,117,0.0,0.0,26.0,1.0,surabaya,25.3,100,Mist,5.8,WSW,0.0,95.5,Sedang
+416857,Depok,2025-12-02 04:30,74.0,pm25,21,74,0.0,12.0,2.0,28.0,depok,25.1,94,Mist,4.3,SSW,0.0,60.099999999999994,Sedang
+416821,Serang,2025-12-02 04:30,36.0,pm25,36,34,0.0,26.0,24.0,33.0,serang,25.1,94,Mist,4.0,SW,0.0,40.599999999999994,Rendah
+531553,Purwakarta,2025-12-02 04:30,43.0,pm25,12,43,0.0,4.0,5.0,13.0,purwakarta,24.1,90,Patchy rain nearby,4.0,S,0.0,38.4,Rendah
+506572,Ngaliyan,2025-12-02 04:30,125.0,pm25,51,125,,,,,ngaliyan,22.1,87,Cloudy,3.6,SSW,0.0,99.0,Sedang
+519043,Plumbungan,2025-12-02 04:30,129.0,pm25,49,129,0.0,10.0,6.0,26.0,plumbungan,25.3,100,Mist,5.8,SW,0.0,102.1,Tinggi
+519187,Kediri,2025-12-02 04:30,48.0,pm25,14,48,0.0,9.0,8.0,14.0,kediri,22.2,85,Partly Cloudy,12.6,SSW,0.0,41.5,Rendah
+544657,Cisarua,2025-12-02 04:30,41.0,pm25,4,15,0.0,40.0,45.0,41.0,cisarua,25.1,94,Mist,3.6,SSW,0.0,19.6,Rendah
+472489,Cilegon,2025-12-02 04:30,88.0,pm25,35,88,0.0,21.0,19.0,1.0,cilegon,25.1,94,Mist,3.6,S,0.0,72.7,Sedang
+519145,Pelabuhanratu,2025-12-02 04:30,29.0,pm25,10,29,0.0,4.0,5.0,22.0,pelabuhanratu,23.2,90,Patchy rain nearby,5.0,ESE,0.0,29.4,Rendah
+472450,Candirejo,2025-12-02 04:30,44.0,pm25,13,44,0.0,17.0,7.0,13.0,candirejo,23.1,98,Moderate or heavy rain shower,3.6,N,0.0,40.099999999999994,Rendah
+519112,Mojopanggung,2025-12-02 04:30,42.0,pm25,17,42,0.0,4.0,5.0,22.0,mojopanggung,19.8,93,Patchy light drizzle,6.8,SW,0.0,39.599999999999994,Rendah
+472486,Leuwiliang,2025-12-02 04:30,58.0,pm25,26,58,0.0,1.0,5.0,51.0,leuwiliang,23.9,91,Partly Cloudy,5.4,SSW,0.0,51.699999999999996,Sedang
+472492,Indramayu,2025-12-02 04:30,66.0,pm25,22,66,0.0,6.0,7.0,17.0,indramayu,27.0,78,Partly Cloudy,10.1,SSW,0.0,54.0,Sedang
+472585,Sidakaya,2025-12-02 04:30,18.0,pm25,1,4,0.0,27.0,16.0,18.0,sidakaya,19.7,91,Partly Cloudy,3.6,SSE,0.0,11.799999999999999,Rendah
+532009,Kedopok,2025-12-02 04:30,25.0,pm25,8,25,0.0,4.0,5.0,22.0,kedopok,22.8,86,Patchy rain nearby,4.7,ESE,0.0,26.0,Rendah
+416833,Bogor,2025-12-02 04:30,,pm25,19,15,0.0,9.0,57.0,55.0,bogor,25.1,94,Mist,6.5,S,0.0,24.1,Rendah
+519124,Rembangan,2025-12-02 04:30,54.0,pm25,17,54,0.0,18.0,5.0,27.0,rembang,23.0,89,Patchy rain nearby,6.1,SW,0.0,46.4,Rendah
+519280,Mojokerto,2025-12-02 04:30,43.0,pm25,14,43,0.0,4.0,3.0,9.0,mojokerto,25.3,100,Mist,7.9,SSW,0.0,40.0,Rendah
+416815,Bekasi,2025-12-02 04:30,60.0,pm25,33,60,0.0,56.0,14.0,8.0,bekasi,25.1,94,Mist,3.6,SW,0.0,55.3,Sedang
+519016,Madiun,2025-12-02 04:30,101.0,pm25,16,101,0.0,9.0,6.0,16.0,madiun,22.7,82,Partly Cloudy,8.3,SSW,0.0,73.6,Sedang
+416842,Gbangbatok Airport,2025-12-01 21:30,43.0,pm25,16,43,0.0,25.0,6.0,5.0,gbk,25.5,85,Patchy rain nearby,8.6,W,0.0,39.1,Rendah
+516745,Jombang,2025-12-02 04:30,55.0,pm25,18,55,0.0,27.0,4.0,26.0,jombang,25.3,100,Mist,12.2,SSW,0.0,48.4,Rendah
+472477,Tangerang,2025-12-02 04:30,5.0,pm25,0,0,0.0,2.0,12.0,5.0,tangerang,25.1,94,Mist,5.8,SW,0.0,9.4,Rendah
+519010,Lamongan,2025-12-02 04:30,,pm25,44,329,0.0,9.0,0.0,0.0,lamongan,25.3,100,Mist,7.6,SW,0.0,220.6,Tinggi
+531565,Pinggirrawa Timur,2025-12-02 04:30,70.0,pm25,31,70,0.0,12.0,0.0,0.0,jakarta-timur,25.1,94,Mist,6.5,SSW,0.0,60.699999999999996,Sedang
+519007,Tuban,2025-12-02 04:30,82.0,pm25,33,82,0.0,0.0,0.0,0.0,tuban,24.8,80,Patchy rain nearby,16.9,SSW,0.0,67.1,Sedang
+519019,Bojonegoro,2025-12-02 04:30,55.0,pm25,19,55,0.0,0.0,18.0,23.0,bojonegoro,23.1,84,Patchy rain nearby,5.4,SW,0.0,47.1,Rendah
