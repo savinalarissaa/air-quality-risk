@@ -43,7 +43,7 @@ if "last_update" in df_risk.columns:
 # st.write(df_risk['last_update'].head(20))
 
 # --- FILTER BERDASAR TANGGAL (untuk risk score) ---
-st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
+st.subheader("📉 Grafik Risk Score Per Jam")
 
 if "last_update" in df_risk.columns:
     min_date = df_risk["last_update"].min().date()
@@ -64,7 +64,6 @@ else:
     df_risk_filtered = df_risk
 
 # --- TAMPILKAN GRAFIK ---
-st.subheader("📉 Grafik Risk Score Per Jam")
 if "risk_score" in df_risk.columns:
     st.line_chart(df_risk_filtered.set_index("last_update")["risk_score"])
 else:
