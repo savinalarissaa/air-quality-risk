@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 import pymongo  # WAJIB
+import certifi
 
 # --- CONFIG APLIKASI ---
 st.set_page_config(
@@ -19,11 +20,11 @@ st.write("Data diambil dari MongoDB / CSV fallback.")
 def load_data():
     try:
         uri = "mongodb+srv://savinalarissa_db_user:pass123@pid.bngfn1a.mongodb.net/?retryWrites=true&w=majority&appName=PID"
-        client = pymongo.MongoClient(uri, serverSelectionTimeoutMS=5000)  # timeout cepat
+        client = pymongo.MongoClient(uri, tls=True, tlsCAFile=certifi.where())  # timeout cepat
         db = client["air_quality_db"]
         collection = db["processed_risk_data"]
         data = list(collection.find({}, {"_id": 0}))
-        return pd.DataFrame(data)  # FIX
+        return pd.DataFrame(data) 
     except Exception as e:
         st.warning(f"MongoDB gagal: {e} — gunakan CSV lokal ⚠")
         try:
