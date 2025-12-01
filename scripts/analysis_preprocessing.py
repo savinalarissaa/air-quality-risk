@@ -15,6 +15,11 @@ weather[num_cols_weather] = weather[num_cols_weather].apply(pd.to_numeric, error
 waqi_means = waqi[num_cols_waqi].mean()
 weather_means = weather[num_cols_weather].mean()
 
+combine = pd.read_csv("data/processed_combined_data.csv")
+num_cols_combine = ['PM10', 'PM25', 'AQI', 'O3', 'Temperature', 'Humidity', 'Wind Speed', 'UV Index', 'risk_score']
+combine[num_cols_combine] = combine[num_cols_combine].apply(pd.to_numeric, errors='coerce')
+combine_means = combine[num_cols_combine].mean()
+
 def categorize(x): # fungsi kategorisasi risiko
     if x < 50:
         return "Rendah"
@@ -23,39 +28,63 @@ def categorize(x): # fungsi kategorisasi risiko
     else:
         return "Tinggi"
 
-def main():
-    # 4. Gabungkan semua data dalam satu baris
+def calculate_risk_score(df):
+    return (
+        0.6 * df["PM25"] +
+        0.3 * df["PM10"] +
+        0.1 * df["Humidity"]
+    )
+
+def process_combine_data():
+    combined_rows = []
+    for i in range(len(waqi)):
+        row = {**waqi.iloc[i].to_dict(), **weather.iloc[i].to_dict()}
+        combined_rows.append(row)
+
+    #Station ID,Kecamatan,Last Update,AQI,Dominant Pollutant,PM10,PM25,CO,NO2,SO2,O3,Lokasi,Temperature,Humidity,Condition,Wind Speed,Wind Direction,UV Index,risk_score,risk_category
+
+    combined = pd.DataFrame(combined_rows)
+
+    combined["risk_score"] = calculate_risk_score(combined)
+    combined["risk_category"] = combined["risk_score"].apply(categorize)
+
+    output_csv = "data/processed_combined_data.csv"
+    combined.to_csv(output_csv, index=False)
+
+    print("DATA BERHASIL DIKOMBINASI! File disimpan di:", output_csv)
+    print(combined.head())
+
+    return combined
+
+def process_risk_score():
     data = {
-        "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        "pm25_avg": [float(waqi_means["PM25"])],
-        "pm10_avg": [float(waqi_means["PM10"])],
-        "o3_avg": [float(waqi_means["O3"])],
-        "aqi_avg": [float(waqi_means["AQI"])],
-        "temp_mean": [float(weather_means["Temperature"])],
-        "humidity_mean": [float(weather_means["Humidity"])],
-        "wind_mean": [float(weather_means["Wind Speed"])],
-        "uv_index": [float(weather_means["UV Index"])]
-    }
+        "update_time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "PM25": [float(combine_means["PM25"])],
+        "PM10": [float(combine_means["PM10"])],
+        "O3": [float(combine_means["O3"])],
+        "AQI": [float(combine_means["AQI"])],
+        "Temperature": [float(combine_means["Temperature"])],
+        "Humidity": [float(combine_means["Humidity"])],
+        "Wind Speed": [float(combine_means["Wind Speed"])],
+        "UV Index": [float(combine_means["UV Index"])]
+    } # janlup ganti di store_data
 
     df = pd.DataFrame(data)
         
-    # 5. Hitung Risk Score
-    df["risk_score"] = (
-        0.6 * df["pm25_avg"] +
-        0.3 * df["pm10_avg"] +
-        0.1 * df["humidity_mean"]
-    )
+    df["risk_score"] = calculate_risk_score(df)
+    df["risk_category"] = df["risk_score"].apply(categorize) 
 
-    df["risk_category"] = df["risk_score"].apply(categorize) # 6. Kategorikan risiko
-
-    # 7. Print hasil
     print("DATASET PREPOCESSING RISK SCORE SELESAI ✅")
     print(df)
-
+    
     # 8. Simpan ke CSV
-    output_csv = "data/processed_data_risk-score.csv"
-    df.to_csv(output_csv, index=False)
-    print(f"\nFile disimpan sebagai: {output_csv}")
+    output_risk = "data/processed_data_risk-score.csv"
+    df.to_csv(output_risk, index=False)
+    print(f"\nFile disimpan sebagai: {output_risk}")
+
+def main():
+    process_combine_data()
+    process_risk_score()    
 
 if __name__ == "__main__":
     main()

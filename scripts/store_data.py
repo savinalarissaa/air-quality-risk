@@ -71,17 +71,17 @@ def insert_risk_score_data():
         df = pd.read_csv(CSV_FILE_RISK_SCORE)
         for _, row in df.iterrows():
             weather_doc = {
-                'last_update': row['date'],
+                'last_update': row['update_time'],
                 'risk_score': row['risk_score'],
                 'risk_category': row['risk_category'],
-                'aqi': row['aqi_avg'],
-                'pm10': row['pm10_avg'],
-                'pm25': row['pm25_avg'],
-                'o3': row['o3_avg'],
-                'humidity_mean': row['humidity_mean'],
-                'temperature_mean': row['temp_mean'],
-                'wind_mean': row['wind_mean'],
-                'uv_index': row['uv_index'],
+                'aqi': row['AQI'],
+                'pm10': row['PM10'],
+                'pm25': row['PM25'],
+                'o3': row['O3'],
+                'humidity_mean': row['Humidity'],
+                'temperature_mean': row['Temperature'],
+                'wind_mean': row['Wind Speed'],
+                'uv_index': row['UV Index'],
                 'timestamp_saved': datetime.utcnow()
             }
 
@@ -100,7 +100,7 @@ def main():
             insert_WAQI_data()
             insert_risk_score_data()
             print(f"🔄 CSV data inserted at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            time.sleep(300)  # 5 menit sekali
+            time.sleep(900)  # 15 menit sekali
     except KeyboardInterrupt:
         print("\nStopped by user.")
     finally:

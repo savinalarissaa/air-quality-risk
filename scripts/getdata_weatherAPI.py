@@ -15,7 +15,6 @@ results = []  # list untuk menampung hasil
 
 for kc in kec:
     params = {"key": KEY, "q": f"{kc}", "aqi": "no"}
-    # params = {"key": KEY, "q": f"{st}, Jakarta", "aqi": "no"}
     resp = requests.get(URL, params=params, timeout=10)
     data = resp.json().get("current", None)
 

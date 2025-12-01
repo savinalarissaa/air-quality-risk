@@ -17,6 +17,7 @@ db.createUser({
 db.createCollection('data_waqi');
 db.createCollection('data_weatherAPI');
 db.createCollection('data_risk_score');
+db.createCollection('data_combined');
 // db.createCollection('');
 
 // Insert sample devices

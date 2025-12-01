@@ -1,228 +1,104 @@
-# import streamlit as st
-# import pandas as pd
-# from pathlib import Path
-# import pymongo
-
 import streamlit as st
 import pandas as pd
-import pymongo
-import matplotlib.pyplot as plt
+from pathlib import Path
 
-# ------------------------------------------
-# MONGODB CONNECTION
-# ------------------------------------------
-MONGO_URI = "mongodb://iot_user:iot_password@localhost:27017/"
-DB_NAME = "air_quality_db"
-COLLECTION_NAME = "data_risk_score"
-
-@st.cache_data
-def load_data():
-    client = pymongo.MongoClient(MONGO_URI)
-    db = client[DB_NAME]
-    collection = db[COLLECTION_NAME]
-
-    data = list(collection.find({}, {'_id': 0}))  # _id tidak ditampilkan
-    df = pd.DataFrame(data)
-
-    # Pastikan format datetime benar
-    df["last_update"] = pd.to_datetime(df["last_update"], errors='coerce')
-    return df
-
-# ------------------------------------------
-# LOAD DATA
-# ------------------------------------------
-st.title("🌫️ Air Quality & Risk Score Dashboard")
-st.write("Data real-time diambil dari MongoDB")
-
-df = load_data()
-
-if df.empty:
-    st.error("⚠ Data kosong di MongoDB!")
-    st.stop()
-
-# ------------------------------------------
-# FILTER TANGGAL
-# ------------------------------------------
-st.sidebar.header("Filter Data")
-
-min_date = df["last_update"].min().date()
-max_date = df["last_update"].max().date()
-
-start_date, end_date = st.sidebar.date_input(
-    "Pilih rentang waktu:",
-    [min_date, max_date]
+# --- CONFIG APLIKASI ---
+st.set_page_config(
+    page_title="Risk Score Dashboard",
+    page_icon="🌫️",
+    layout="wide",
 )
 
-df_filtered = df[
-    (df["last_update"].dt.date >= start_date) &
-    (df["last_update"].dt.date <= end_date)
-]
+# --- HEADER APLIKASI ---
+st.title("🌫️ Air Quality & Risk Score Dashboard")
+st.write("Data dibaca langsung dari GitHub (tanpa MongoDB).")
 
-st.subheader("📋 Data Terfilter")
-st.write(df_filtered)
+# --- LOAD DATA ---
+@st.cache_data
+def load_data():
+    try:
+        # FILENAME_weatherAPI = Path(__file__).parent / 'data/weatherAPI_output.csv'
+        # FILENAME_WAQI = Path(__file__).parent / 'data/waqi_output.csv'
+        # FILENAME_RISK_SCORE = Path(__file__).parent / 'data/processed_data_risk-score.csv'
 
-# ------------------------------------------
-# GRAFIK RISK SCORE
-# ------------------------------------------
-st.subheader("📈 Risk Score dari waktu ke waktu")
+        # df_weather = pd.read_csv(FILENAME_weatherAPI)
+        # df_waqi = pd.read_csv(FILENAME_WAQI)
+        # df_risk = pd.read_csv(FILENAME_RISK_SCORE)
 
-fig, ax = plt.subplots()
-ax.plot(df_filtered["last_update"], df_filtered["risk_score"], marker='o')
-ax.set_xlabel("Time")
-ax.set_ylabel("Risk Score")
-ax.set_title("Grafik Risk Score per Waktu")
-st.pyplot(fig)
+        # df_weather['date'] = pd.to_datetime(df_weather['date'], errors='coerce')
+        # df_waqi['date'] = pd.to_datetime(df_waqi['date'], errors='coerce')
+        # df_risk['date'] = pd.to_datetime(df_risk['date'], errors='coerce')
 
-# ------------------------------------------
-# TAMBAHKAN DISKETRISASI (Pie Chart)
-# ------------------------------------------
-st.subheader("📊 Distribusi Kategori Risiko")
+        FILENAME_combined = Path(__file__).parent / 'data/processed_combined_data.csv'
+        df_combined = pd.read_csv(FILENAME_combined)
+        df_combined['date'] = pd.to_datetime(df_combined['date'], errors='coerce')
+        return df_combined
+    except Exception as e:
+        st.error(f"Gagal membaca CSV: {e}")
+        return pd.DataFrame()
 
-pie_data = df_filtered["risk_category"].value_counts()
-fig2, ax2 = plt.subplots()
-ax2.pie(pie_data, labels=pie_data.index, autopct='%1.1f%%')
-ax2.set_title("Sebaran Risk Category")
-st.pyplot(fig2)
+df_combined = load_data()
 
-# ------------------------------------------
-# STATISTIK CEPAT
-# ------------------------------------------
-st.subheader("📌 Statistik")
+if df_combined.empty:
+    st.stop()  # Hentikan app jika data kosong
 
-col1, col2, col3 = st.columns(3)
-col1.metric("Risk Score Rata-rata", f"{df_filtered['risk_score'].mean():.2f}")
-col2.metric("Risk Score Maximum", f"{df_filtered['risk_score'].max():.2f}")
-col3.metric("Jumlah Data", len(df_filtered))
+# --- KONVERSI DATETIME ---
+if "Last Update" in df_combined.columns:
+    df_combined["Last Update"] = pd.to_datetime(df_combined["Last Update"])
 
-# ------------------------------------------
-# CATATAN
-# ------------------------------------------
-st.markdown("---")
-st.write("Dashboard ini membaca data langsung dari MongoDB: **" + DB_NAME + "." + COLLECTION_NAME + "**")
+# if "date" in df_weather.columns:
+#     df_weather["date"] = pd.to_datetime(df_weather["date"])
 
-# @st.cache_resource
-# def init_connection():
-#     return pymongo.MongoClient(**st.secrets["mongo"])
+# if "date" in df_waqi.columns:
+#     df_waqi["Last_Update"] = pd.to_datetime(df_waqi["Last_Update"])
 
-# client = init_connection()
+# if "date" in df_risk.columns:
+#     df_risk["date"] = pd.to_datetime(df_risk["date"])
 
-# # Pull data from the collection.
-# # Uses st.cache_data to only rerun when the query changes or after 10 min.
-# @st.cache_data(ttl=600)
-# def get_data():
-#     db = client.mydb
-#     items = db.mycollection.find()
-#     items = list(items)  # make hashable for st.cache_data
-#     return items
+st.subheader("📄 Tampilan Data")
+st.dataframe(df_combined)
 
-# items = get_data()
+# --- FILTER BERDASAR TANGGAL ---
+st.subheader("🔍 Filter Data Berdasarkan Tanggal")
 
-# # Print results.
-# for item in items:
-#     st.write(f"{item['name']} has a :{item['pet']}:")
+if "Last Update" in df_combined.columns:
+    min_date = df_combined["Last Update"].min().date()
+    max_date = df_combined["Last Update"].max().date()
 
+    start_date, end_date = st.date_input(
+        "Pilih rentang tanggal:",
+        (min_date, max_date),
+        min_value=min_date,
+        max_value=max_date,
+    )
 
-# # -------------------------------
-# # PAGE CONFIG
-# # -------------------------------
-# st.set_page_config(
-#     page_title="Weather Dashboard",
-#     page_icon="🌦️",
-#     layout="wide"
-# )
+    df_filtered = df_combined[
+        (df_combined["Last Update"].dt.date >= start_date) &
+        (df_combined["Last Update"].dt.date <= end_date)
+    ]
+else:
+    df_filtered = df_combined
 
-# # -------------------------------
-# # LOAD DATA (CACHE)
-# # -------------------------------
-# @st.cache_data
-# def load_weather_data():
-#     DATA_FILENAME = Path(__file__).parent / 'data/weather/weatherAPI_output.csv'
-#     df = pd.read_csv(DATA_FILENAME)
-#     df['Last Update'] = pd.to_datetime(df['Last Update'], errors='coerce')
-#     return df
+# --- TAMPILKAN GRAFIK ---
+st.subheader("📉 Grafik Risk Score Per Tanggal")
+if "risk_score" in df_combined.columns:
+    st.line_chart(df_filtered.set_index("Last Update")["risk_score"])
+else:
+    st.warning("Kolom `risk_score` tidak ditemukan di CSV.")
 
-# df = load_weather_data()
+st.subheader("📉 Grafik Risk Score Per Tanggal (date)")
+st.bar_chart(df_filtered.set_index("Kecamatan")["risk_score"])
 
-# # -------------------------------
-# # HEADER
-# # -------------------------------
-# st.title("🌦️ Real-Time Weather Dashboard")
-# st.write("Data berasal dari API Cuaca (WeatherAPI / WAQI).")
+# --- TAMPILKAN RINGKASAN ---
+st.subheader("📊 Statistik Singkat")
+st.write(df_filtered.describe())
 
-# st.write("Jumlah data:", len(df))
-
-# # -------------------------------
-# # FILTERS
-# # -------------------------------
-# # Sidebar Filter
-# st.sidebar.header("Filter Data")
-
-# kecamatan_list = sorted(df['Kecamatan'].unique())
-# selected_kecamatan = st.sidebar.multiselect(
-#     "Pilih Kecamatan:",
-#     kecamatan_list,
-#     kecamatan_list[:3]  # default 3 pertama
-# )
-
-# # Filter tanggal
-# min_date = df['Last Update'].min().date()
-# max_date = df['Last Update'].max().date()
-
-# start_date, end_date = st.sidebar.date_input(
-#     "Rentang Waktu:",
-#     [min_date, max_date]
-# )
-
-# # Cek dulu sebelum filter
-# if not selected_kecamatan:
-#     st.warning("⚠ Silakan pilih minimal 1 kecamatan di sidebar.")
-#     st.stop()
-
-# # Filter dataframe
-# filtered_df = df[
-#     (df['Kecamatan'].isin(selected_kecamatan)) &
-#     (df['Last Update'].dt.date >= start_date) &
-#     (df['Last Update'].dt.date <= end_date)
-# ]
-
-# st.subheader("📌 Data yang Ditampilkan")
-# st.dataframe(filtered_df, use_container_width=True)
-
-# # -------------------------------
-# # CHARTS
-# # -------------------------------
-# st.subheader("🌡️ Suhu (Temperature) per Kecamatan")
-# st.line_chart(filtered_df, x='Last Update', y='Temperature', color='Kecamatan')
-
-# st.subheader("💧 Kelembaban (Humidity) per Kecamatan")
-# st.line_chart(filtered_df, x='Last Update', y='Humidity', color='Kecamatan')
-
-# st.subheader("🌬️ Kecepatan Angin (Wind Speed)")
-# st.line_chart(filtered_df, x='Last Update', y='Wind Speed', color='Kecamatan')
-
-# # -------------------------------
-# # STATISTIK
-# # -------------------------------
-# st.subheader("📊 Rata-rata & Maksimum")
-# col1, col2, col3 = st.columns(3)
-
-# col1.metric("Suhu Rata-rata", f"{filtered_df['Temperature'].mean():.2f} °C")
-# col2.metric("Kelembaban Rata-rata", f"{filtered_df['Humidity'].mean():.2f} %")
-# col3.metric("UV Index Maksimum", f"{filtered_df['UV Index'].max():.2f}")
-
-# # -------------------------------
-# # KONDISI TERAKHIR PER KECAMATAN
-# # -------------------------------
-# st.subheader("🔎 Kondisi Cuaca Terakhir per Kecamatan")
-
-# last_data = filtered_df.sort_values("Last Update").groupby("Kecamatan").tail(1)
-
-# for i, row in last_data.iterrows():
-#     st.write(f"### 📍 {row['Kecamatan']}")
-#     st.write(f"🕒 Update: {row['Last Update']}")
-#     st.write(f"🌡️ Temperature: **{row['Temperature']} °C**")
-#     st.write(f"💧 Humidity: **{row['Humidity']} %**")
-#     st.write(f"🌬️ Wind Speed: **{row['Wind Speed']} km/h**")
-#     st.write(f"🌞 UV Index: **{row['UV Index']}**")
-#     st.write(f"🌤️ Condition: **{row['Condition']}**")
-#     st.write("---")
+# --- DOWNLOAD DATA ---
+st.subheader("⬇️ Unduh Data")
+csv = df_filtered.to_csv(index=False).encode("utf-8")
+st.download_button(
+    label="Download CSV Filtered",
+    data=csv,
+    file_name="filtered_risk_score.csv",
+    mime="text/csv",
+)
