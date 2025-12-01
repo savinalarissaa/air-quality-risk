@@ -1,9 +1,11 @@
 import requests
 import pandas as pd
 
+# 1. URL API (token kamu dimasukkan ke URL)
 KEY = "ba157ed0ab654607b79144746253011"
 URL = "http://api.weatherapi.com/v1/forecast.json"
 
+# 2. Data kecamatan yang mau diambil
 kec = [
         "serpong", "cilegon", "bandung", "tunggulrejo", "manahan", "surabaya", "depok", 
         "serang", "purwakarta", "ngaliyan", "plumbungan", "kediri", "cisarua", "cilegon", 
@@ -11,10 +13,11 @@ kec = [
         "kedopok", "bogor", "rembang", "mojokerto", "bekasi", "madiun", "gbk", "jombang", 
         "tangerang", "lamongan", "jakarta-timur", "tuban", "bojonegoro"]
 
+# 3. Mengambil data dari API untuk setiap kecamatan (main loop)
 results = []  # list untuk menampung hasil
 
 for kc in kec:
-    params = {"key": KEY, "q": f"{kc}", "aqi": "no"}
+    params = {"key": KEY, "q": f"{kc}", "aqi": "no"} # parameter request 
     resp = requests.get(URL, params=params, timeout=10)
     data = resp.json().get("current", None)
 
@@ -45,12 +48,10 @@ for kc in kec:
             "UV Index": "null"
         })
 
-# buat DataFrame
+# 4. Buat DataFrame
 df = pd.DataFrame(results)
 
-# simpan ke CSV
+# 5. Simpan ke CSV
 OUTPUT_CSV = "data/weather/weatherAPI_output.csv"
 df.to_csv(OUTPUT_CSV, index=False)
-
 print(f"CSV berhasil dibuat di: {OUTPUT_CSV}")
-# print(df)

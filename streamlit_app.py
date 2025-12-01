@@ -1,3 +1,4 @@
+# streamlit_app.py : FILE IMPLEMENTASI STREAMLIT DASHBOARD 
 import streamlit as st
 import pandas as pd
 from pathlib import Path
@@ -36,9 +37,6 @@ if df_combined.empty:
 if "Last Update" in df_combined.columns:
     df_combined["Last Update"] = pd.to_datetime(df_combined["Last Update"])
 
-st.subheader("📄 Tampilan Data Terbaru")
-st.dataframe(df_combined)
-
 # --- FILTER BERDASAR TANGGAL ---
 st.subheader("🔍 Filter Data Berdasarkan Tanggal")
 
@@ -67,6 +65,7 @@ if "risk_score" in df_risk.columns:
 else:
     st.warning("Kolom `risk_score` tidak ditemukan di CSV.")
 
+# --- GRAFIK RISK SCORE PER KECAMATAN ---
 st.subheader("📉 Grafik Risk Score Per Kecamatan")
 if "Last Update" in df_combined.columns:
     min_date = df_combined["Last Update"].min().date()
@@ -81,6 +80,10 @@ else:
 
 st.write(f"Kecamatan dengan risiko tertinggi: {df_filtered.loc[df_filtered['risk_score'].idxmax()]['Kecamatan']} (Score: {df_filtered['risk_score'].max()})")
 st.bar_chart(df_filtered.set_index("Kecamatan")["risk_score"])
+
+# --- TAMPILAN SEMUA DATA TERBARU ---
+st.subheader("📄 Tampilan Semua Data Terbaru")
+st.dataframe(df_combined)
 
 # --- DOWNLOAD DATA ---
 st.subheader("⬇️ Unduh Data")

@@ -1,3 +1,4 @@
+# KODE MENGAMBIL SEMUA HISTORY DATA RISK_SCORE DARI MONGODB (di-import di store_data.py)
 import pymongo
 import pandas as pd
 

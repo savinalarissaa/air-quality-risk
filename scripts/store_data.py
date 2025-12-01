@@ -90,15 +90,17 @@ def insert_risk_score_data():
                 'timestamp_saved': datetime.now(timezone.utc)
 
             }
-
             risk_score_collection.insert_one(doc)
+
+            # export to CSV after insert (digunakan untuk grafik data risk score di streamlit)
             export.export_all_risk_score_to_csv() 
-        
+            
         print(f"✔ Inserted Risk Score")
 
     except Exception as e:
         print(f"ERROR reading CSV Risk Score: {e}")
 
+# masukkin combined data ke MongoDB
 def insert_combined_data():
     try:
         df = pd.read_csv(CSV_FILE_COMBINED)
@@ -125,13 +127,17 @@ def main():
     print("STARTING CSV -> MongoDB weather stream...")
     try:
         while True:
-            prep.main()
+            prep.main() # jalankan pre-processing & analysis
+
+            # insert data ke MongoDB
             insert_weatherAPI_data()
             insert_WAQI_data()
             insert_risk_score_data()
             insert_combined_data()
+
             print(f"🔄 CSV data inserted at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
-            time.sleep(900)  # 15 menit sekali
+            
+            time.sleep(900)  # dilakukan 15 menit sekali
     except KeyboardInterrupt:
         print("\nStopped by user.")
     finally:

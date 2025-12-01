@@ -6,31 +6,29 @@ import json
 key = "58ec7efe5d7fb9144a8d3f257e377b673140c695"
 url = f"https://api.waqi.info/feed/"
 
+# 2. ID stasiun yang mau diambil (bisa dilihat dari website WAQI)
 station = [ "416785", "472489", "416860", "472675", "416908", "420154", "416857", "416821", "531553", 
            "506572", "519043", "519187", "544657", "472489", "519145", "472450", "519112", "472486", 
            "472492", "472585", "532009", "416833", "519124", "519280", "416815", "519016", "416842", 
            "516745", "472477", "519010", "531565", "519007", "519019"
         ]
 
+# 3. Mengambil data dari API untuk setiap stasiun (main loop)
 results = []  # list untuk menampung hasil
 
-# url = f"https://api.waqi.info/feed/jakarta/?token={key}"
-
-# main loop untuk setiap stasiun
 for kc in station:
-    url = f"https://api.waqi.info/feed/A{kc}/?token={key}"
+    url = f"https://api.waqi.info/feed/A{kc}/?token={key}" # url api waqi
     
-    # 2. Request data dari API
+    # request data dari API
     response = requests.get(url)
     data = response.json()
-    # results.append(data)
 
-    # 3. Cek status
+    # cek status
     if data.get("status") != "ok":
         print("Gagal mengambil data:", data)
         exit()
     
-    if data:
+    if data: # kalau data berhasil ditemukan, di-append ke results
         results.append({
             "Station ID": kc,
             "Kecamatan": data.get("data", {}).get("city", {}).get("name", "null"),
@@ -60,8 +58,10 @@ for kc in station:
             "O3": "null"
         })
 
-# 4. simpan ke csv
+# 4. Buat DataFrame
 df = pd.DataFrame(results)
+
+# 5. Simpan ke CSV
 output_csv = "data/aqi/waqi_output.csv"
 df.to_csv(output_csv, index=False)
 print(f"CSV berhasil dibuat di: {output_csv}")
