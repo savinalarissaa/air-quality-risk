@@ -37,8 +37,8 @@ if df_combined.empty:
 if "Last Update" in df_combined.columns:
     df_combined["Last Update"] = pd.to_datetime(df_combined["Last Update"])
 
-# --- FILTER BERDASAR TANGGAL ---
-st.subheader("🔍 Filter Data Berdasarkan Tanggal")
+# --- FILTER BERDASAR TANGGAL (untuk risk score) ---
+st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
 
 if "last_update" in df_risk.columns:
     min_date = df_risk["last_update"].min().date()
@@ -56,30 +56,41 @@ if "last_update" in df_risk.columns:
         (df_risk["last_update"].dt.date <= end_date)
     ]
 else:
-    df_filtered = df_risk
+    df_risk_filtered = df_risk
 
 # --- TAMPILKAN GRAFIK ---
 st.subheader("📉 Grafik Risk Score Per Jam")
 if "risk_score" in df_risk.columns:
-    st.line_chart(df_filtered.set_index("last_update")["risk_score"])
+    st.line_chart(df_risk_filtered.set_index("last_update")["risk_score"])
 else:
-    st.warning("Kolom `risk_score` tidak ditemukan di CSV.")
+    st.warning("Kolom `risk_score` tidak ditemukan.")
 
-# --- GRAFIK RISK SCORE PER KECAMATAN ---
-st.subheader("📉 Grafik Risk Score Per Kecamatan")
+# --- FILTER BERDASAR TANGGAL (untuk data per kecamatan) ---
 if "Last Update" in df_combined.columns:
-    min_date = df_combined["Last Update"].min().date()
-    max_date = df_combined["Last Update"].max().date()
+    min_combined = df_combined["Last Update"].min().date()
+    max_combined = df_combined["Last Update"].max().date()
 
-    df_filtered = df_combined[
-        (df_combined["Last Update"].dt.date >= start_date) &
-        (df_combined["Last Update"].dt.date <= end_date)
+    start_combined, end_combined = st.date_input(
+        "Pilih rentang tanggal untuk data kecamatan:",
+        (min_combined, max_combined),
+        min_value=min_combined,
+        max_value=max_combined,
+        key="combined_filter"
+    )
+
+    df_combined_filtered = df_combined[
+        (df_combined["Last Update"].dt.date >= start_combined) &
+        (df_combined["Last Update"].dt.date <= end_combined)
     ]
 else:
-    df_filtered = df_combined
+    df_combined_filtered = df_combined
 
-st.write(f"Kecamatan dengan risiko tertinggi: {df_filtered.loc[df_filtered['risk_score'].idxmax()]['Kecamatan']} (Score: {df_filtered['risk_score'].max()})")
-st.bar_chart(df_filtered.set_index("Kecamatan")["risk_score"])
+# --- TAMPILKAN GRAFIK RISK SCORE PER KECAMATAN ---
+st.subheader("📉 Grafik Risk Score Per Kecamatan")
+st.write(
+    f"Kecamatan risiko tertinggi: {df_combined_filtered.loc[df_combined_filtered['risk_score'].idxmax()]['Kecamatan']}"
+)
+st.bar_chart(df_combined_filtered.set_index("Kecamatan")["risk_score"])
 
 # --- TAMPILAN SEMUA DATA TERBARU ---
 st.subheader("📄 Tampilan Semua Data Terbaru")
