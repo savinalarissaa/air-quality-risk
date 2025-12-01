@@ -39,6 +39,9 @@ if "Last Update" in df_combined.columns:
 if "last_update" in df_risk.columns:
     df_risk["last_update"] = pd.to_datetime(df_risk["last_update"])
 
+st.subheader("testing")
+st.write(df_risk['last_update'].head(20))
+
 # # --- FILTER BERDASAR TANGGAL (untuk risk score) ---
 # st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
 
@@ -68,6 +71,7 @@ else:
     st.warning("Kolom `risk_score` tidak ditemukan.")
 
 # --- FILTER BERDASAR TANGGAL (untuk data per kecamatan) ---
+st.subheader("📉 Grafik Risk Score Per Kecamatan")
 if "Last Update" in df_combined.columns:
     min_combined = df_combined["Last Update"].min().date()
     max_combined = df_combined["Last Update"].max().date()
@@ -88,7 +92,6 @@ else:
     df_combined_filtered = df_combined
 
 # --- TAMPILKAN GRAFIK RISK SCORE PER KECAMATAN ---
-st.subheader("📉 Grafik Risk Score Per Kecamatan")
 st.write(
     f"Kecamatan risiko tertinggi: {df_combined_filtered.loc[df_combined_filtered['risk_score'].idxmax()]['Kecamatan']}"
 )
