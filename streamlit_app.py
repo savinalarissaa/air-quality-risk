@@ -39,31 +39,31 @@ if "Last Update" in df_combined.columns:
 if "last_update" in df_risk.columns:
     df_risk["last_update"] = pd.to_datetime(df_risk["last_update"])
 
-# --- FILTER BERDASAR TANGGAL (untuk risk score) ---
-st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
+# # --- FILTER BERDASAR TANGGAL (untuk risk score) ---
+# st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
 
-if "last_update" in df_risk.columns:
-    min_date = df_risk["last_update"].min().date()
-    max_date = df_risk["last_update"].max().date()
+# if "last_update" in df_risk.columns:
+#     min_date = df_risk["last_update"].min().date()
+#     max_date = df_risk["last_update"].max().date()
 
-    start_date, end_date = st.date_input(
-        "Pilih rentang waktu:",
-        (min_date, max_date),
-        min_value=min_date,
-        max_value=max_date,
-    )
+#     start_date, end_date = st.date_input(
+#         "Pilih rentang waktu:",
+#         (min_date, max_date),
+#         min_value=min_date,
+#         max_value=max_date,
+#     )
 
-    df_risk_filtered = df_risk[
-        (df_risk["last_update"].dt.date >= start_date) &
-        (df_risk["last_update"].dt.date <= end_date)
-    ]
-else:
-    df_risk_filtered = df_risk
+#     df_risk_filtered = df_risk[
+#         (df_risk["last_update"].dt.date >= start_date) &
+#         (df_risk["last_update"].dt.date <= end_date)
+#     ]
+# else:
+#     df_risk_filtered = df_risk
 
 # --- TAMPILKAN GRAFIK ---
 st.subheader("📉 Grafik Risk Score Per Jam")
 if "risk_score" in df_risk.columns:
-    st.line_chart(df_risk_filtered.set_index("last_update")["risk_score"])
+    st.line_chart(df_risk.set_index("last_update")["risk_score"])
 else:
     st.warning("Kolom `risk_score` tidak ditemukan.")
 
