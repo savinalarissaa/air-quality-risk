@@ -51,7 +51,7 @@ if "last_update" in df_risk.columns:
         max_value=max_date,
     )
 
-    df_filtered = df_risk[
+    df_risk_filtered = df_risk[
         (df_risk["last_update"].dt.date >= start_date) &
         (df_risk["last_update"].dt.date <= end_date)
     ]
