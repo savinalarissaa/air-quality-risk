@@ -5,10 +5,10 @@ from datetime import datetime, timezone
 import analysis_preprocessing as prep
 
 # KONEKSI MongoDB
-# client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
-client = pymongo.MongoClient(
-    "mongodb+srv://savinalarissa_db_user:pass123@pid.bngfn1a.mongodb.net/?appName=PID"
-)
+client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
+# client = pymongo.MongoClient(
+#     "mongodb+srv://savinalarissa_db_user:pass123@pid.bngfn1a.mongodb.net/?appName=PID"
+# )
 
 db = client.air_quality_db
 weatherAPI_collection = db.data_weatherAPI

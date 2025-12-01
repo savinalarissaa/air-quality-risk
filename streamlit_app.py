@@ -23,14 +23,17 @@ def load_data():
         # collection = db["processed_risk_data"]
         # data = list(collection.find({}, {"_id": 0}))
         FILENAME_combined = Path(__file__).parent / 'data/processed_combined_data.csv'
+        FILENAME_risk = Path(__file__).parent / 'data/export_mongoDB_risk_data.csv'
         df_combined = pd.read_csv(FILENAME_combined)
+        df_risk = pd.read_csv(FILENAME_risk)
         df_combined['Last Update'] = pd.to_datetime(df_combined['Last Update'], errors='coerce')
-        return df_combined
+        df_risk['Last Update'] = pd.to_datetime(df_risk['Last Update'], errors='coerce')
+        return df_combined, df_risk
     except Exception as e:
         st.error(f"Gagal membaca CSV: {e}")
-        return pd.DataFrame()
+        return pd.DataFrame(), pd.DataFrame()
 
-df_combined = load_data()
+df_combined, df_risk = load_data()
 
 if df_combined.empty:
     st.stop()  # Hentikan app jika data kosong
@@ -39,44 +42,40 @@ if df_combined.empty:
 if "Last Update" in df_combined.columns:
     df_combined["Last Update"] = pd.to_datetime(df_combined["Last Update"])
 
-st.subheader("📄 Tampilan Data")
+st.subheader("📄 Tampilan Data Terbaru")
 st.dataframe(df_combined)
 
 # --- FILTER BERDASAR TANGGAL ---
 st.subheader("🔍 Filter Data Berdasarkan Tanggal")
 
-if "Last Update" in df_combined.columns:
-    min_date = df_combined["Last Update"].min().date()
-    max_date = df_combined["Last Update"].max().date()
+if "last_update" in df_risk.columns:
+    min_date = df_risk["last_update"].min().date()
+    max_date = df_risk["last_update"].max().date()
 
     start_date, end_date = st.date_input(
-        "Pilih rentang tanggal:",
+        "Pilih rentang waktu:",
         (min_date, max_date),
         min_value=min_date,
         max_value=max_date,
     )
 
-    df_filtered = df_combined[
-        (df_combined["Last Update"].dt.date >= start_date) &
-        (df_combined["Last Update"].dt.date <= end_date)
+    df_filtered = df_risk[
+        (df_risk["last_update"].dt.date >= start_date) &
+        (df_risk["last_update"].dt.date <= end_date)
     ]
 else:
-    df_filtered = df_combined
+    df_filtered = df_risk
 
 # --- TAMPILKAN GRAFIK ---
 st.subheader("📉 Grafik Risk Score Per Jam")
-if "risk_score" in df_combined.columns:
-    st.line_chart(df_filtered.set_index("Last Update")["risk_score"])
+if "risk_score" in df_risk.columns:
+    st.line_chart(df_filtered.set_index("last_update")["risk_score"])
 else:
     st.warning("Kolom `risk_score` tidak ditemukan di CSV.")
 
 st.subheader("📉 Grafik Risk Score Per Kecamatan")
 st.write(f"Kecamatan dengan risiko tertinggi: {df_filtered.loc[df_filtered['risk_score'].idxmax()]['Kecamatan']} (Score: {df_filtered['risk_score'].max()})")
 st.bar_chart(df_filtered.set_index("Kecamatan")["risk_score"])
-
-# --- TAMPILKAN RINGKASAN ---
-# st.subheader("📊 Statistik Singkat")
-# st.write(df_filtered.describe())
 
 # --- DOWNLOAD DATA ---
 st.subheader("⬇️ Unduh Data")
