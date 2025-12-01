@@ -36,6 +36,8 @@ if df_combined.empty:
 # --- KONVERSI DATETIME ---
 if "Last Update" in df_combined.columns:
     df_combined["Last Update"] = pd.to_datetime(df_combined["Last Update"])
+if "last_update" in df_risk.columns:
+    df_risk["last_update"] = pd.to_datetime(df_risk["last_update"])
 
 # --- FILTER BERDASAR TANGGAL (untuk risk score) ---
 st.subheader("🔍 Filter Data Risk Score Berdasarkan Tanggal")
@@ -98,7 +100,7 @@ st.dataframe(df_combined)
 
 # --- DOWNLOAD DATA ---
 st.subheader("⬇️ Unduh Data")
-csv = df_filtered.to_csv(index=False).encode("utf-8")
+csv = df_combined_filtered.to_csv(index=False).encode("utf-8")
 st.download_button(
     label="Download CSV Filtered",
     data=csv,
