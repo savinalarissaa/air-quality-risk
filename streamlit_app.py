@@ -66,7 +66,7 @@ else:
 # --- TAMPILKAN GRAFIK ---
 st.subheader("📉 Grafik Risk Score Per Jam")
 if "risk_score" in df_risk.columns:
-    st.line_chart(df_risk.set_index("last_update")["risk_score"])
+    st.line_chart(df_risk_filtered.set_index("last_update")["risk_score"])
 else:
     st.warning("Kolom `risk_score` tidak ditemukan.")
 
