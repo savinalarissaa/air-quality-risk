@@ -1,7 +1,7 @@
 import time
 import json
 from kafka import KafkaProducer
-from getdata_weatherAPI import ambil_data_weather # ini dijadikan main bisa??
+from getdata_weatherAPI import ambil_data_weather
 from getdata_waqi import ambil_data_waqi
 
 # Kafka config
