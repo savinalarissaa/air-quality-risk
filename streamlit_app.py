@@ -17,18 +17,6 @@ st.write("Data dibaca langsung dari GitHub (tanpa MongoDB).")
 @st.cache_data
 def load_data():
     try:
-        # FILENAME_weatherAPI = Path(__file__).parent / 'data/weatherAPI_output.csv'
-        # FILENAME_WAQI = Path(__file__).parent / 'data/waqi_output.csv'
-        # FILENAME_RISK_SCORE = Path(__file__).parent / 'data/processed_data_risk-score.csv'
-
-        # df_weather = pd.read_csv(FILENAME_weatherAPI)
-        # df_waqi = pd.read_csv(FILENAME_WAQI)
-        # df_risk = pd.read_csv(FILENAME_RISK_SCORE)
-
-        # df_weather['date'] = pd.to_datetime(df_weather['date'], errors='coerce')
-        # df_waqi['date'] = pd.to_datetime(df_waqi['date'], errors='coerce')
-        # df_risk['date'] = pd.to_datetime(df_risk['date'], errors='coerce')
-
         FILENAME_combined = Path(__file__).parent / 'data/processed_combined_data.csv'
         df_combined = pd.read_csv(FILENAME_combined)
         df_combined['Last Update'] = pd.to_datetime(df_combined['Last Update'], errors='coerce')
@@ -86,12 +74,12 @@ if "risk_score" in df_combined.columns:
 else:
     st.warning("Kolom `risk_score` tidak ditemukan di CSV.")
 
-st.subheader("📉 Grafik Risk Score Per Tanggal (date)")
+st.subheader("📉 Grafik Risk Score Per Kecamatan")
 st.bar_chart(df_filtered.set_index("Kecamatan")["risk_score"])
 
 # --- TAMPILKAN RINGKASAN ---
-st.subheader("📊 Statistik Singkat")
-st.write(df_filtered.describe())
+# st.subheader("📊 Statistik Singkat")
+# st.write(df_filtered.describe())
 
 # --- DOWNLOAD DATA ---
 st.subheader("⬇️ Unduh Data")

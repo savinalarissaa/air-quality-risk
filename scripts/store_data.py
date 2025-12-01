@@ -10,11 +10,12 @@ db = client.air_quality_db
 weatherAPI_collection = db.data_weatherAPI
 waqi_collection = db.data_waqi
 risk_score_collection = db.data_risk_score
-
+combined_collection = db.data_combined
 
 CSV_FILE_API = "data/weather/weatherAPI_output.csv"
 CSV_FILE_WAQI = "data/aqi/waqi_output.csv"
 CSV_FILE_RISK_SCORE = "data/processed_data_risk-score.csv"
+CSV_FILE_COMBINED = "data/processed_combined_data.csv"
 
 # masukkin weatherAPI ke MongoDB
 def insert_weatherAPI_data():
@@ -22,7 +23,7 @@ def insert_weatherAPI_data():
         df = pd.read_csv(CSV_FILE_API)
 
         for _, row in df.iterrows():
-            weather_doc = {
+            doc = {
                 'kecamatan': row['Kecamatan'],
                 'last_update': row['Last Update'],
                 'temperature': row['Temperature'],
@@ -34,18 +35,18 @@ def insert_weatherAPI_data():
                 'timestamp_saved': datetime.utcnow()
             }
 
-            weatherAPI_collection.insert_one(weather_doc)
+            weatherAPI_collection.insert_one(doc)
             print(f"✔ Inserted weather data for {row['Kecamatan']}")
 
     except Exception as e:
-        print(f"ERROR reading CSV: {e}")
+        print(f"ERROR reading CSV WeatherAPI: {e}")
 
 # masukkin WAQI ke MongoDB
 def insert_WAQI_data():
     try:
         df = pd.read_csv(CSV_FILE_WAQI)
         for _, row in df.iterrows():
-            weather_doc = {
+            doc = {
                 'station_id': row['Station ID'],
                 'kecamatan': row['Kecamatan'],
                 'last_update': row['Last Update'],
@@ -59,18 +60,18 @@ def insert_WAQI_data():
                 'o3': row['O3']
             }
 
-            waqi_collection.insert_one(weather_doc)
+            waqi_collection.insert_one(doc)
             print(f"✔ Inserted AQI data for {row['Kecamatan']}")
 
     except Exception as e:
-        print(f"ERROR reading CSV: {e}")
+        print(f"ERROR reading CSV WAQI: {e}")
 
 # masukkin risk score ke MongoDB
 def insert_risk_score_data():
     try:
         df = pd.read_csv(CSV_FILE_RISK_SCORE)
         for _, row in df.iterrows():
-            weather_doc = {
+            doc = {
                 'last_update': row['update_time'],
                 'risk_score': row['risk_score'],
                 'risk_category': row['risk_category'],
@@ -85,8 +86,30 @@ def insert_risk_score_data():
                 'timestamp_saved': datetime.utcnow()
             }
 
-            risk_score_collection.insert_one(weather_doc)
+            risk_score_collection.insert_one(doc)
             print(f"✔ Inserted Risk Score")
+
+    except Exception as e:
+        print(f"ERROR reading CSV Risk Score: {e}")
+
+def insert_combined_data():
+    try:
+        df = pd.read_csv(CSV_FILE_COMBINED)
+        for _, row in df.iterrows():
+            doc = {
+                # Station ID,Kecamatan,Last Update,AQI,Dominant Pollutant,PM10,PM25,CO,NO2,SO2,O3,Lokasi,Temperature,Humidity,Condition,Wind Speed,Wind Direction,UV Index,risk_score,risk_category
+                'kecamatan' : row['Kecamatan'],
+                'last_update': row['Last Update'],
+                'risk_score': row['risk_score'],
+                'risk_category': row['risk_category'],
+                'aqi': row['AQI'],
+                'pm10': row['PM10'],
+                'pm25': row['PM25'],
+                'humidity_mean': row['Humidity']
+            }
+
+            combined_collection.insert_one(doc)
+            print(f"✔ Inserted Combined data.")
 
     except Exception as e:
         print(f"ERROR reading CSV: {e}")
@@ -99,6 +122,7 @@ def main():
             insert_weatherAPI_data()
             insert_WAQI_data()
             insert_risk_score_data()
+            insert_combined_data()
             print(f"🔄 CSV data inserted at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
             time.sleep(900)  # 15 menit sekali
     except KeyboardInterrupt:

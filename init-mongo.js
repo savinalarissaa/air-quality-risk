@@ -3,8 +3,8 @@ db = db.getSiblingDB('air_quality_db');
 
 // Buat user untuk aplikasi
 db.createUser({
-  user: 'aqi_user',
-  pwd: 'aqi_password',
+  user: 'iot_user',
+  pwd: 'iot_password',
   roles: [
     {
       role: 'readWrite',
