@@ -1,11 +1,15 @@
 import pymongo
 import pandas as pd
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 import analysis_preprocessing as prep
 
 # KONEKSI MongoDB
-client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
+# client = pymongo.MongoClient("mongodb://iot_user:iot_password@localhost:27017/air_quality_db")
+client = pymongo.MongoClient(
+    "mongodb+srv://savinalarissa_db_user:pass123@pid.bngfn1a.mongodb.net/?appName=PID"
+)
+
 db = client.air_quality_db
 weatherAPI_collection = db.data_weatherAPI
 waqi_collection = db.data_waqi
@@ -32,11 +36,12 @@ def insert_weatherAPI_data():
                 'wind_speed': row['Wind Speed'],
                 'wind_direction': row['Wind Direction'],
                 'uv_index': row['UV Index'],
-                'timestamp_saved': datetime.utcnow()
+                'timestamp_saved': datetime.now(timezone.utc)
             }
 
             weatherAPI_collection.insert_one(doc)
-            print(f"✔ Inserted weather data for {row['Kecamatan']}")
+           
+        print(f"✔ Inserted weather data]")
 
     except Exception as e:
         print(f"ERROR reading CSV WeatherAPI: {e}")
@@ -61,7 +66,8 @@ def insert_WAQI_data():
             }
 
             waqi_collection.insert_one(doc)
-            print(f"✔ Inserted AQI data for {row['Kecamatan']}")
+        
+        print(f"✔ Inserted AQI data for {row['Kecamatan']}")
 
     except Exception as e:
         print(f"ERROR reading CSV WAQI: {e}")
@@ -83,11 +89,13 @@ def insert_risk_score_data():
                 'temperature_mean': row['Temperature'],
                 'wind_mean': row['Wind Speed'],
                 'uv_index': row['UV Index'],
-                'timestamp_saved': datetime.utcnow()
+                'timestamp_saved': datetime.now(timezone.utc)
+
             }
 
             risk_score_collection.insert_one(doc)
-            print(f"✔ Inserted Risk Score")
+        
+        print(f"✔ Inserted Risk Score")
 
     except Exception as e:
         print(f"ERROR reading CSV Risk Score: {e}")
@@ -109,7 +117,8 @@ def insert_combined_data():
             }
 
             combined_collection.insert_one(doc)
-            print(f"✔ Inserted Combined data.")
+        
+        print(f"✔ Inserted Combined data.")
 
     except Exception as e:
         print(f"ERROR reading CSV: {e}")
@@ -123,7 +132,7 @@ def main():
             insert_WAQI_data()
             insert_risk_score_data()
             insert_combined_data()
-            print(f"🔄 CSV data inserted at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"🔄 CSV data inserted at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
             time.sleep(900)  # 15 menit sekali
     except KeyboardInterrupt:
         print("\nStopped by user.")
