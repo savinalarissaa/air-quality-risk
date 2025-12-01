@@ -31,7 +31,7 @@ def load_data():
 
         FILENAME_combined = Path(__file__).parent / 'data/processed_combined_data.csv'
         df_combined = pd.read_csv(FILENAME_combined)
-        df_combined['date'] = pd.to_datetime(df_combined['date'], errors='coerce')
+        df_combined['Last Update'] = pd.to_datetime(df_combined['Last Update'], errors='coerce')
         return df_combined
     except Exception as e:
         st.error(f"Gagal membaca CSV: {e}")
