@@ -68,6 +68,24 @@ else:
     st.warning("Kolom `risk_score` tidak ditemukan di CSV.")
 
 st.subheader("📉 Grafik Risk Score Per Kecamatan")
+if "Last Update" in df_combined.columns:
+    min_date = df_combined["Last Update"].min().date()
+    max_date = df_combined["Last Update"].max().date()
+
+    # start_date, end_date = st.date_input(
+    #     "Pilih rentang waktu:",
+    #     (min_date, max_date),
+    #     min_value=min_date,
+    #     max_value=max_date,
+    # )
+
+    df_filtered = df_combined[
+        (df_combined["Last Update"].dt.date >= start_date) &
+        (df_combined["Last Update"].dt.date <= end_date)
+    ]
+else:
+    df_filtered = df_combined
+
 st.write(f"Kecamatan dengan risiko tertinggi: {df_filtered.loc[df_filtered['risk_score'].idxmax()]['Kecamatan']} (Score: {df_filtered['risk_score'].max()})")
 st.bar_chart(df_filtered.set_index("Kecamatan")["risk_score"])
 
