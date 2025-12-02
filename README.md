@@ -1,7 +1,9 @@
 
 ## Profile
 Program Studi       : Teknik Komputer
+
 Matakuliah          : Pemrosesan dan Infrastruktur Data 
+
 Anggota Kelompok 4  :
 - SAVINA LARISSA ANJANI		    (NIM 235150300111027)
 - NABILLA SUCI AMANDA		    (NIM 235150301111044)
@@ -9,8 +11,6 @@ Anggota Kelompok 4  :
 - NISRINA INDRIANI JATMIKO		(NIM 235150307111022)
 
 Tahun Ajaran : 2025/Ganjil
-
-=======================================================
 
 ## Cara makai:
 1) 'docker-compose up --build'
@@ -25,8 +25,6 @@ Tahun Ajaran : 2025/Ganjil
 
 5) Pada streamlit (setelah di-push ke github sendiri), upload aplikasi ini
     - hasil dashboard projek kami bisa dilihat di https://air-quality-risk-kel4.streamlit.app/
-
-=======================================================
 
 ## Hasil Dashboard (streamlit)
 link https://air-quality-risk-kel4.streamlit.app/
